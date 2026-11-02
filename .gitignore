@@ -1,0 +1,28 @@
+# Terraform provider binaries / plugin cache (hundreds of MB — never commit)
+**/.terraform/*
+.terraform/
+
+# State files: contain resource IDs, endpoints and the AWS account ID
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# Crash logs
+crash.log
+crash.*.log
+
+# Variable files that may hold secrets
+*.tfvars
+*.tfvars.json
+!example.tfvars
+
+# CLI config
+.terraformrc
+terraform.rc
+
+# Plan output
+*.tfplan
+tfplan
+
+# OS noise
+.DS_Store
