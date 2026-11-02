@@ -1,0 +1,186 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 870" width="1200" height="870" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#5A6672"/>
+    </marker>
+    <marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#D86613"/>
+    </marker>
+    <marker id="ap" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#7B3FBF"/>
+    </marker>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1C7C54"/>
+    </marker>
+    <filter id="sh" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-color="#232F3E" flood-opacity="0.13"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="870" fill="#FFFFFF"/>
+
+  <text x="32" y="42" font-size="21" font-weight="bold" fill="#232F3E">Amazon EKS on Terraform — Modular Build</text>
+  <text x="32" y="66" font-size="12.5" fill="#5A6672">Every box is tinted by the module that declares it — three local modules composed by the root <tspan font-weight="bold">main.tf</tspan></text>
+
+  <!-- ============ LEGEND ============ -->
+  <rect x="32" y="96" width="236" height="196" rx="9" fill="#F7F9FB" stroke="#C9D2DA" stroke-width="1.3"/>
+  <text x="50" y="122" font-size="12.5" font-weight="bold" fill="#232F3E">Module ownership</text>
+  <rect x="50" y="136" width="22" height="13" rx="3" fill="#EDF7F1" stroke="#1C7C54" stroke-width="1.5"/>
+  <text x="82" y="147" font-size="11.5" font-weight="bold" fill="#145C3E">module.networking</text>
+  <text x="82" y="163" font-size="10" fill="#5A6672">vpc · subnets · igw · rt · sg</text>
+  <rect x="50" y="180" width="22" height="13" rx="3" fill="#FFF4E5" stroke="#D86613" stroke-width="1.5"/>
+  <text x="82" y="191" font-size="11.5" font-weight="bold" fill="#8A3F00">module.iam</text>
+  <text x="82" y="207" font-size="10" fill="#5A6672">eks-role + cluster policy</text>
+  <rect x="50" y="224" width="22" height="13" rx="3" fill="#F3EBFC" stroke="#7B3FBF" stroke-width="1.5"/>
+  <text x="82" y="235" font-size="11.5" font-weight="bold" fill="#4A1C85">module.eks</text>
+  <text x="82" y="251" font-size="10" fill="#5A6672">cluster · node role · node group</text>
+  <text x="50" y="276" font-size="9.5" fill="#8B98A5">Grey = AWS-managed or caller-side</text>
+
+  <!-- ============ OPERATOR ============ -->
+  <rect x="32" y="308" width="236" height="104" rx="9" fill="#F7F9FB" stroke="#8B98A5" stroke-width="1.3" filter="url(#sh)"/>
+  <text x="150" y="334" font-size="12.5" font-weight="bold" text-anchor="middle" fill="#232F3E">Operator</text>
+  <text x="150" y="356" font-size="10.5" text-anchor="middle" fill="#5A6672">terraform init / plan / apply</text>
+  <text x="150" y="376" font-size="10.5" text-anchor="middle" fill="#5A6672">aws eks update-kubeconfig</text>
+  <text x="150" y="396" font-size="10.5" text-anchor="middle" fill="#5A6672">kubectl</text>
+  <path d="M268 362 H344" stroke="#5A6672" stroke-width="2.2" marker-end="url(#a)"/>
+  <text x="306" y="354" font-size="9.5" text-anchor="middle" fill="#8B98A5">HTTPS</text>
+
+  <!-- ============ DEPENDENCY CHAIN ============ -->
+  <rect x="32" y="440" width="236" height="300" rx="9" fill="#FFFFFF" stroke="#C9D2DA" stroke-width="1.3"/>
+  <text x="50" y="466" font-size="12.5" font-weight="bold" fill="#232F3E">Module wiring (main.tf)</text>
+
+  <rect x="48" y="484" width="104" height="62" rx="7" fill="#EDF7F1" stroke="#1C7C54" stroke-width="1.5"/>
+  <text x="100" y="506" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#145C3E">networking</text>
+  <text x="100" y="522" font-size="9" text-anchor="middle" fill="#1C7C54">no inputs</text>
+  <text x="100" y="536" font-size="9" text-anchor="middle" fill="#1C7C54">↓ subnet_ids</text>
+
+  <rect x="164" y="484" width="104" height="62" rx="7" fill="#FFF4E5" stroke="#D86613" stroke-width="1.5"/>
+  <text x="216" y="506" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#8A3F00">iam</text>
+  <text x="216" y="522" font-size="9" text-anchor="middle" fill="#B5712A">no inputs</text>
+  <text x="216" y="536" font-size="9" text-anchor="middle" fill="#B5712A">↓ eks_role_arn</text>
+
+  <path d="M100 546 C 100 578, 122 586, 136 604" stroke="#1C7C54" stroke-width="2" fill="none" marker-end="url(#ag)"/>
+  <path d="M216 546 C 216 578, 194 586, 180 604" stroke="#D86613" stroke-width="2" fill="none" marker-end="url(#ao)"/>
+
+  <rect x="48" y="610" width="220" height="74" rx="7" fill="#F3EBFC" stroke="#7B3FBF" stroke-width="1.8"/>
+  <text x="158" y="632" font-size="11" font-weight="bold" text-anchor="middle" fill="#4A1C85">module.eks</text>
+  <text x="158" y="650" font-size="9.5" text-anchor="middle" fill="#6B38A8">subnet_ids = module.networking…</text>
+  <text x="158" y="665" font-size="9.5" text-anchor="middle" fill="#6B38A8">eks_role_arn = module.iam…</text>
+  <text x="158" y="679" font-size="9.5" font-style="italic" text-anchor="middle" fill="#6B38A8">depends_on = [module.iam]</text>
+  <text x="50" y="706" font-size="9.5" fill="#5A6672">depends_on forces the policy</text>
+  <text x="50" y="721" font-size="9.5" fill="#5A6672">attachment to land before the</text>
+  <text x="50" y="736" font-size="9.5" fill="#5A6672">cluster is created.</text>
+
+  <!-- ============ AWS REGION ============ -->
+  <rect x="296" y="96" width="872" height="712" rx="11" fill="none" stroke="#232F3E" stroke-width="2.2"/>
+  <text x="314" y="122" font-size="13" font-weight="bold" fill="#232F3E">AWS Cloud · region us-east-1</text>
+  <text x="314" y="139" font-size="9.5" fill="#8B98A5">var.aws_region (default)</text>
+
+  <!-- Internet -->
+  <text x="430" y="170" font-size="11" font-weight="bold" text-anchor="middle" fill="#5A6672">Internet</text>
+  <path d="M430 178 V222" stroke="#5A6672" stroke-width="1.8" stroke-dasharray="4 3" marker-end="url(#a)" marker-start="url(#a)"/>
+
+  <!-- ============ IAM PANEL ============ -->
+  <rect x="946" y="150" width="204" height="248" rx="9" fill="#FBFCFD" stroke="#C9D2DA" stroke-width="1.3"/>
+  <text x="1048" y="174" font-size="12" font-weight="bold" text-anchor="middle" fill="#232F3E">IAM — two roles</text>
+
+  <rect x="962" y="186" width="172" height="90" rx="7" fill="#FFF4E5" stroke="#D86613" stroke-width="1.6"/>
+  <text x="1048" y="206" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#8A3F00">eks-role</text>
+  <text x="1048" y="222" font-size="9" text-anchor="middle" fill="#B5712A">trusts eks.amazonaws.com</text>
+  <text x="1048" y="240" font-size="9" text-anchor="middle" fill="#8A6236">AmazonEKSClusterPolicy</text>
+  <text x="1048" y="262" font-size="8.5" font-style="italic" text-anchor="middle" fill="#B5712A">module.iam</text>
+
+  <rect x="962" y="288" width="172" height="96" rx="7" fill="#F3EBFC" stroke="#7B3FBF" stroke-width="1.6"/>
+  <text x="1048" y="307" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#4A1C85">eks-nodes-role</text>
+  <text x="1048" y="322" font-size="9" text-anchor="middle" fill="#6B38A8">trusts ec2.amazonaws.com</text>
+  <text x="1048" y="338" font-size="9" text-anchor="middle" fill="#6B38A8">AmazonEKSWorkerNodePolicy</text>
+  <text x="1048" y="352" font-size="9" text-anchor="middle" fill="#6B38A8">AmazonEKS_CNI_Policy</text>
+  <text x="1048" y="366" font-size="9" text-anchor="middle" fill="#6B38A8">EC2ContainerRegistryReadOnly</text>
+  <text x="1048" y="379" font-size="8.5" font-style="italic" text-anchor="middle" fill="#6B38A8">module.eks</text>
+
+  <path d="M962 231 C 924 231, 906 300, 894 342" stroke="#D86613" stroke-width="2" fill="none" marker-end="url(#ao)"/>
+  <text x="936" y="276" font-size="9" fill="#D86613" transform="rotate(66 936 276)">role_arn</text>
+  <path d="M962 336 C 930 340, 906 410, 894 436" stroke="#7B3FBF" stroke-width="2" fill="none" marker-end="url(#ap)"/>
+  <text x="934" y="396" font-size="9" fill="#7B3FBF" transform="rotate(62 934 396)">node_role_arn</text>
+
+  <!-- ============ VPC ============ -->
+  <rect x="320" y="196" width="600" height="586" rx="10" fill="none" stroke="#1C7C54" stroke-width="2" stroke-dasharray="8 4"/>
+  <text x="338" y="220" font-size="12" font-weight="bold" fill="#145C3E">VPC &quot;myvpc&quot; · 10.0.0.0/16</text>
+  <text x="338" y="236" font-size="9.5" fill="#1C7C54">enable_dns_support ✓ · enable_dns_hostnames ✓ (both required by EKS)</text>
+
+  <!-- IGW + RT -->
+  <rect x="350" y="246" width="158" height="54" rx="7" fill="#EDF7F1" stroke="#1C7C54" stroke-width="1.6" filter="url(#sh)"/>
+  <text x="429" y="268" font-size="11" font-weight="bold" text-anchor="middle" fill="#145C3E">Internet Gateway</text>
+  <text x="429" y="286" font-size="10" text-anchor="middle" fill="#1C7C54">DIGW</text>
+
+  <rect x="528" y="246" width="200" height="54" rx="7" fill="#EDF7F1" stroke="#1C7C54" stroke-width="1.6" filter="url(#sh)"/>
+  <text x="628" y="268" font-size="11" font-weight="bold" text-anchor="middle" fill="#145C3E">Publicmyroutetable</text>
+  <text x="628" y="286" font-size="10" text-anchor="middle" fill="#1C7C54">0.0.0.0/0 → DIGW</text>
+  <path d="M508 273 H528" stroke="#1C7C54" stroke-width="2" marker-end="url(#ag)"/>
+
+  <rect x="748" y="246" width="158" height="54" rx="7" fill="#EDF7F1" stroke="#1C7C54" stroke-width="1.6" filter="url(#sh)"/>
+  <text x="827" y="266" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#145C3E">my-security-group</text>
+  <text x="827" y="283" font-size="9" text-anchor="middle" fill="#C0392B">ingress 0.0.0.0/0 · all ports</text>
+  <text x="827" y="295" font-size="8.5" text-anchor="middle" fill="#8B98A5">see Hardening Notes #1</text>
+
+  <!-- Control plane -->
+  <rect x="350" y="322" width="544" height="88" rx="8" fill="#F3EBFC" stroke="#7B3FBF" stroke-width="1.8" filter="url(#sh)"/>
+  <text x="622" y="346" font-size="13" font-weight="bold" text-anchor="middle" fill="#4A1C85">aws_eks_cluster &quot;myeks&quot; → my-eks-cluster</text>
+  <text x="622" y="367" font-size="10.5" text-anchor="middle" fill="#6B38A8">endpoint_public_access ✓   ·   endpoint_private_access ✓</text>
+  <text x="622" y="385" font-size="10.5" text-anchor="middle" fill="#6B38A8">vpc_config.subnet_ids = both public subnets (2 AZs required)</text>
+  <text x="622" y="402" font-size="9" font-style="italic" text-anchor="middle" fill="#8B98A5">control plane is AWS-managed — runs outside your subnets</text>
+
+  <!-- Node group band -->
+  <rect x="350" y="430" width="544" height="44" rx="7" fill="#F3EBFC" stroke="#7B3FBF" stroke-width="1.5" stroke-dasharray="6 3"/>
+  <text x="622" y="449" font-size="11" font-weight="bold" text-anchor="middle" fill="#4A1C85">aws_eks_node_group &quot;nodes&quot; → my-eks-node-group-2</text>
+  <text x="622" y="465" font-size="9.5" text-anchor="middle" fill="#6B38A8">c7i-flex.large · SPOT · desired 2 / min 2 / max 4 · max_unavailable 1</text>
+  <path d="M622 410 V430" stroke="#7B3FBF" stroke-width="2" marker-end="url(#ap)"/>
+
+  <!-- Subnet A -->
+  <rect x="350" y="500" width="262" height="256" rx="8" fill="#EDF7F1" stroke="#1C7C54" stroke-width="1.6"/>
+  <text x="481" y="524" font-size="12" font-weight="bold" text-anchor="middle" fill="#145C3E">Publicsubnet1</text>
+  <text x="481" y="542" font-size="10" text-anchor="middle" fill="#1C7C54">10.0.0.0/24 · us-east-1a</text>
+  <text x="481" y="558" font-size="9.5" text-anchor="middle" fill="#1C7C54">map_public_ip_on_launch ✓</text>
+  <rect x="376" y="574" width="98" height="76" rx="6" fill="#FFFFFF" stroke="#7B3FBF" stroke-width="1.5"/>
+  <text x="425" y="598" font-size="10" font-weight="bold" text-anchor="middle" fill="#4A1C85">EC2 worker</text>
+  <text x="425" y="614" font-size="8.5" text-anchor="middle" fill="#6B38A8">c7i-flex.large</text>
+  <text x="425" y="628" font-size="8.5" text-anchor="middle" fill="#6B38A8">SPOT</text>
+  <text x="425" y="643" font-size="8.5" text-anchor="middle" fill="#8B98A5">kubelet + CNI</text>
+  <rect x="488" y="574" width="98" height="76" rx="6" fill="#FFFFFF" stroke="#7B3FBF" stroke-width="1.5"/>
+  <text x="537" y="598" font-size="10" font-weight="bold" text-anchor="middle" fill="#4A1C85">EC2 worker</text>
+  <text x="537" y="614" font-size="8.5" text-anchor="middle" fill="#6B38A8">c7i-flex.large</text>
+  <text x="537" y="628" font-size="8.5" text-anchor="middle" fill="#6B38A8">SPOT</text>
+  <text x="537" y="643" font-size="8.5" text-anchor="middle" fill="#8B98A5">kubelet + CNI</text>
+  <text x="481" y="678" font-size="9.5" text-anchor="middle" fill="#5A6672">route_table_association → public RT</text>
+  <text x="481" y="696" font-size="9.5" text-anchor="middle" fill="#5A6672">pods get VPC IPs via AWS VPC CNI</text>
+  <text x="481" y="730" font-size="9" text-anchor="middle" fill="#8B98A5">aws_subnet.subnet</text>
+
+  <!-- Subnet B -->
+  <rect x="632" y="500" width="262" height="256" rx="8" fill="#EDF7F1" stroke="#1C7C54" stroke-width="1.6"/>
+  <text x="763" y="524" font-size="12" font-weight="bold" text-anchor="middle" fill="#145C3E">Publicsubnet2</text>
+  <text x="763" y="542" font-size="10" text-anchor="middle" fill="#1C7C54">10.0.2.0/24 · us-east-1b</text>
+  <text x="763" y="558" font-size="9.5" text-anchor="middle" fill="#1C7C54">map_public_ip_on_launch ✓</text>
+  <rect x="658" y="574" width="98" height="76" rx="6" fill="#FFFFFF" stroke="#7B3FBF" stroke-width="1.5"/>
+  <text x="707" y="598" font-size="10" font-weight="bold" text-anchor="middle" fill="#4A1C85">EC2 worker</text>
+  <text x="707" y="614" font-size="8.5" text-anchor="middle" fill="#6B38A8">c7i-flex.large</text>
+  <text x="707" y="628" font-size="8.5" text-anchor="middle" fill="#6B38A8">SPOT</text>
+  <text x="707" y="643" font-size="8.5" text-anchor="middle" fill="#8B98A5">kubelet + CNI</text>
+  <rect x="770" y="574" width="98" height="76" rx="6" fill="#FFFFFF" stroke="#7B3FBF" stroke-width="1.5"/>
+  <text x="819" y="598" font-size="10" font-weight="bold" text-anchor="middle" fill="#4A1C85">EC2 worker</text>
+  <text x="819" y="614" font-size="8.5" text-anchor="middle" fill="#6B38A8">c7i-flex.large</text>
+  <text x="819" y="628" font-size="8.5" text-anchor="middle" fill="#6B38A8">SPOT</text>
+  <text x="819" y="643" font-size="8.5" text-anchor="middle" fill="#8B98A5">kubelet + CNI</text>
+  <text x="763" y="678" font-size="9.5" text-anchor="middle" fill="#5A6672">route_table_association → public RT</text>
+  <text x="763" y="696" font-size="9.5" text-anchor="middle" fill="#5A6672">scaling spans 2 AZs (min_size = 2)</text>
+  <text x="763" y="730" font-size="9" text-anchor="middle" fill="#8B98A5">aws_subnet.subnet2</text>
+
+  <path d="M481 474 V500" stroke="#7B3FBF" stroke-width="2" marker-end="url(#ap)"/>
+  <path d="M763 474 V500" stroke="#7B3FBF" stroke-width="2" marker-end="url(#ap)"/>
+
+  <!-- node egress path -->
+  <path d="M360 500 C 338 490, 334 470, 334 440 L 334 320 C 334 290, 338 273, 350 273" stroke="#1C7C54" stroke-width="1.8" fill="none" stroke-dasharray="5 3" marker-end="url(#ag)"/>
+  <text x="330" y="400" font-size="9" fill="#1C7C54" text-anchor="middle" transform="rotate(-90 330 400)">node egress → ECR / EKS API</text>
+
+  <text x="32" y="836" font-size="10" fill="#8B98A5">Nodes run in public subnets and the security group is fully open — the as-built lab configuration. Both are listed in the README&apos;s Hardening Notes before any production reuse.</text>
+  <text x="32" y="854" font-size="10" fill="#8B98A5">Dashed green = routed internet path · solid purple = EKS-managed relationship · orange = IAM trust consumed by the control plane.</text>
+</svg>
